@@ -1,0 +1,13 @@
+# kubectl apply -f pod.yaml
+# kubectl get pods
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: test
+  name: redis
+spec:
+  containers:
+  - image: redis
+    name: redis

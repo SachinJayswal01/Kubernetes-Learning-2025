@@ -1,0 +1,24 @@
+# kubectl apply -f .\day-8-rs.yaml
+# kubectl scale rs/day-8-rs --replicas=6
+# kubectl get all
+# kubectl delete rs day-8-rs
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: day-8-rs
+   labels:
+     app: day-8-rs
+spec:
+  template:
+    metadata:
+      labels:
+        app: day-8-rs
+    spec:
+      containers:
+        - name: day-8-rs
+          image: nginx
+  replicas: 4
+  selector:
+    matchLabels:
+      app: day-8-rs

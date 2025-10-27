@@ -1,0 +1,16 @@
+# kubectl apply -f .\loadbalancer.yaml
+# kubectl describe service/loadbalancer-svc
+# kubectl get all
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer-svc
+  labels:
+    env: demo
+spec:
+  type: LoadBalancer
+  ports:
+   - port: 80
+  selector:
+    env: demo

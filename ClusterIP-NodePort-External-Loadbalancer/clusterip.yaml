@@ -1,0 +1,15 @@
+# kubectl apply -f .\clusterip.yaml
+# kubectl describe service/clusterip-svc
+# kubectl get all
+
+apiVersion: v1
+kind: Service
+metadata: 
+  labels:
+    env: demo
+  name: clusterip-svc
+spec:
+  ports:
+  - port: 80
+  selector:
+    env: demo
