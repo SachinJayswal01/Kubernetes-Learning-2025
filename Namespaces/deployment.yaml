@@ -1,0 +1,49 @@
+# kubectl apply -f deployment.yaml
+# kubectl get all -n=ns-demo -o wide
+# kubectl get all -o wide
+# kubectl exec -it nginx-deploy-default-fd8d8f96-qxk72 -n=ns-demo --sh
+# curl 10.244.2.11
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels: 
+    app: nginx-deploy-ns-demo
+  name: nginx-deploy-ns-demo
+  namespace: ns-demo
+spec:
+   template:
+     metadata:
+       labels:
+         app: nginx-deploy-ns-demo
+     spec:
+       containers:
+        - name: nginx-deploy-ns-demo
+          image: nginx
+   replicas: 3
+   selector:
+      matchLabels:
+        app: nginx-deploy-ns-demo
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels: 
+    app: nginx-deploy-default
+  name: nginx-deploy-default
+spec:
+   template:
+     metadata:
+       labels:
+         app: nginx-deploy-default
+     spec:
+       containers:
+        - name: nginx-deploy-default
+          image: nginx
+   replicas: 3
+   selector:
+      matchLabels:
+        app: nginx-deploy-default
