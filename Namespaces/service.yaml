@@ -1,3 +1,9 @@
+# kubectl apply -f service.yaml
+# kubectl get all -n=ns-demo -o wide
+# kubectl get all -o wide
+# kubectl exec -it nginx-deploy-default-fd8d8f96-qxk72 -n=ns-demo --sh
+# curl svc-default.default.svc.cluster.local
+
 apiVersion: v1
 kind: Service
 metadata: 

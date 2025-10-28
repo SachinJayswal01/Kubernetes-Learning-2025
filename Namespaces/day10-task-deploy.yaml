@@ -1,0 +1,51 @@
+# kubectl apply -f day10-task-deploy.yaml
+# kubectl get all -n ns1 -o wide
+# kubectl get all -n ns2 -o wide
+# kubectl exec -it deploy-ns1-69bb9c8b8d-w2qzj -n ns1 -- sh
+# curl 10.244.1.11
+# exit
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-ns1
+  name: deploy-ns1
+  namespace: ns1
+spec:
+  template:
+    metadata:
+      labels:
+        app: deploy-ns1
+    spec:
+      containers:
+       - name: deploy-ns1
+         image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-ns1
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-ns2
+  name: deploy-ns2
+  namespace: ns2
+spec:
+  template:
+    metadata:
+      labels:
+        app: deploy-ns2
+    spec:
+      containers:
+       - name: deploy-ns2
+         image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-ns2

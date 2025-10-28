@@ -1,0 +1,41 @@
+# kubectl apply -f day10-task-deploy.yaml
+# kubectl get all -n ns1 -o wide
+# kubectl get all -n ns2 -o wide
+# kubectl exec -it deploy-ns1-69bb9c8b8d-w2qzj -n ns1 -- sh
+# curl 10.96.143.167
+# curl svc-ns2
+# curl svc-ns2.ns2.svc.cluster.local
+# exit
+
+# kubectl delete ns ns1
+# kubectl delete ns ns2
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: svc-ns1
+  name: svc-ns1
+  namespace: ns1
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: deploy-ns1
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: svc-ns2
+  name: svc-ns2
+  namespace: ns2
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: deploy-ns2
+
+
