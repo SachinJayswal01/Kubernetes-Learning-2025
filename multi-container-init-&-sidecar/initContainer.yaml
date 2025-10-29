@@ -1,0 +1,29 @@
+# kubectl apply -f initContainer.yaml
+# kubectl get pods
+# kubectl logs myapp -c alpine-init1
+# kubectl logs myapp
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+spec:
+  containers:
+    - name: alpine
+      image: alpine:3
+      env:
+      - name: FIRSTNAME
+        value: "Sachin"
+      command: ['sh', '-c', 'echo "application is running"; sleep 3000']
+  initContainers:
+    - name: alpine-init1
+      image: alpine:3
+      command: ['sh', '-c']
+      args: ['until nslookup myservice.default.svc.cluster.local; do echo "waiting for service to be up"; sleep 2; done']
+    - name: alpine-init2
+      image: alpine:3
+      command: ['sh', '-c']
+      args: ['until nslookup myservice1.default.svc.cluster.local; do echo "waiting for service to be up"; sleep 2; done']
+

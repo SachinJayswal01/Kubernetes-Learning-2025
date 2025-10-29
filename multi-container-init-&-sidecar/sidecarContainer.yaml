@@ -1,0 +1,30 @@
+# kubectl apply -f sidecarContainer.yaml
+# kubectl get pods
+# kubectl logs myapp -c sidecar-container
+# kubectl logs myapp 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp
+    image: alpine:3
+    command: ['sh', '-c', 'echo "This is myapp log" > /opt/myapp.txt; sleep 90']
+    volumeMounts:
+      - name: data
+        mountPath: /opt
+  initContainers:
+  - name: sidecar-container
+    image: alpine:3
+    command: ['sh', '-c', 'tail -F /opt/myapp.txt']
+    restartPolicy: Always
+    volumeMounts:                                         
+        mountPath: /opt
+  volumes:
+    - name: data
+      emptyDir: {}
+  restartPolicy: Never
