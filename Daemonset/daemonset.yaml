@@ -1,0 +1,28 @@
+# kubectl apply -f daemonset.yaml
+# kubectl get all
+# kubectl get ds 
+# kubectl get ds -A
+# kubectl get nodes
+# kubectl get pods -A
+
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  labels:
+    app: myapps
+  name: myapps
+spec:
+  template:
+    metadata:
+      labels:
+        app: myapps
+    spec:
+      containers:
+      - name: ds-app
+        image: nginx
+        ports:
+        - containerPort: 80
+  selector:
+    matchLabels:
+      app: myapps

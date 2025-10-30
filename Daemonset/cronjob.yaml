@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app: cronjob-nginx
+  name: cronjob-nginx
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cronjob-nginx
+            image: busybox
+            ports: 
+            - containerPort: 80
+            command: ['sh', '-c', 'echo "40daysofkubernetes"']
+          restartPolicy: OnFailure
+  
+    
