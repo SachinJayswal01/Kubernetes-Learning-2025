@@ -1,0 +1,21 @@
+# kubectl get nodes
+# kubectl taint node kind-new-cluster-with-ports-worker app=redis:NoSchedule
+# kubectl taint node kind-new-cluster-with-ports-worker2 app=redis:NoSchedule
+# kubectl describe node kind-new-cluster-with-ports-worker
+# kubectl describe node kind-new-cluster-with-ports-worker2
+# kubectl apply -f noToleration.yaml
+# kubectl get pods
+# >> Remove taints
+# kubectl taint node kind-new-cluster-with-ports-worker app=redis:NoSchedule-
+# kubectl taint node kind-new-cluster-with-ports-worker2 app=redis:NoSchedule-
+
+apiVersion: v1
+kind: Pod
+metadata: 
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx

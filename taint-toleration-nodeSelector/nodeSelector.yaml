@@ -1,0 +1,20 @@
+# kubectl get nodes
+# kubectl label node kind-new-cluster-with-ports-worker app=redis
+# kubectl get nodes --show-labels
+# kubectl get pod
+# kubectl describe pod redis
+# >> Remove label using Key
+# kubectl label node kind-new-cluster-with-ports-worker app-
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: redis
+  nodeSelector:
+    app: redis

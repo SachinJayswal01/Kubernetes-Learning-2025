@@ -1,0 +1,19 @@
+# kubectl apply -f toleration.yaml
+# kubectl get pods
+# kubectl describe pod redis
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: redis
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "redis"
+    effect: "NoSchedule"
