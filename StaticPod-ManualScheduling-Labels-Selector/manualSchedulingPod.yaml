@@ -1,0 +1,25 @@
+# kubectl get nodes
+# docker exec -it kind-new-cluster-with-ports-control-plane bash
+# cd /etc/kubernetes/manifests/
+# ls -lrt
+# mv kube-scheduler.yaml /tmp/
+# >> other terminal
+# kubectl apply -f manualSchedulingPod.yaml
+# kubectl get pods
+# kubectl describe pod nginx
+# >> end other terminal
+# mv /tmp/kube-scheduler.yaml 
+# exit
+
+apiVersion: v1
+kind: Pod
+metadata: 
+  labels:
+    env: dev
+    app: nginx
+  name: nginx
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+  nodeName: kind-new-cluster-with-ports-worker2

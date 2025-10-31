@@ -1,0 +1,7 @@
+kubectl get nodes
+docker exec -it kind-new-cluster-with-ports-control-plane bash
+ps -ef | grep kubelet
+cd /etc/kubernetes/manifests/
+ls -lrt
+kubectl get pods -n kube-system
+
