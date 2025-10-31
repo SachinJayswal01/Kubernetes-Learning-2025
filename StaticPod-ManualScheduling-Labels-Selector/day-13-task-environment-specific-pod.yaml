@@ -1,0 +1,48 @@
+# kubectl apply -f day-13-task-environment-specific-pod.yaml
+# kubectl get pod  --show-labels
+# kubectl get pod --selector=env=test
+
+apiVersion: v1
+kind: Pod
+metadata: 
+  labels:
+    env: test
+  name: nginx-test
+spec:
+  containers:
+  - name: nginx-test
+    image: nginx
+    ports:
+    - containerPort: 80
+
+
+---
+# kubectl get pod --selector=env=dev
+apiVersion: v1
+kind: Pod
+metadata: 
+  labels:
+    env: dev
+  name: nginx-dev
+spec:
+  containers:
+  - name: nginx-dev
+    image: nginx
+    ports:
+    - containerPort: 80
+
+
+---
+# kubectl get pod --selector=env=prod
+apiVersion: v1
+kind: Pod
+metadata: 
+  labels:
+    env: prod
+  name: nginx-prod
+spec:
+  containers:
+  - name: nginx-prod
+    image: nginx
+    ports:
+    - containerPort: 80

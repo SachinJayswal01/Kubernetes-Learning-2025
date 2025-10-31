@@ -1,0 +1,28 @@
+# kubectl get nodes
+# docker exec -it kind-new-cluster-with-ports-control-plane bash
+# cd /etc/kubernetes/manifests/
+# ls -lrt
+# mv kube-scheduler.yaml /tmp/
+# >> other terminal
+# kubectl apply -f day-13-task-manualpod.yaml
+# kubectl get pods
+# kubectl describe pod nginx
+# >> end other terminal
+# mv /tmp/kube-scheduler.yaml /etc/kubernetes/manifests -- > once this is moved back the pod is newly started
+# exit
+# kubectl get po -n kube-system
+
+apiVersion: v1
+kind: Pod
+metadata: 
+  labels:
+    env: app
+    app: nginx
+  name: nginx
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+  nodeName: kind-new-cluster-with-ports-worker
