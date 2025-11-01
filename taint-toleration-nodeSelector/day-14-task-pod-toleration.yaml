@@ -1,0 +1,19 @@
+# kubectl apply -f day-14-task-pod-toleration.yaml
+# kubectl get pod
+# kubectl describe pod nginx
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  tolerations:
+  - key: "gpu"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"

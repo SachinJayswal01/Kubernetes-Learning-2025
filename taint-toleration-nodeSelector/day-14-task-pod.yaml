@@ -1,0 +1,23 @@
+# kubectl get nodes
+# kubectl taint node kind-new-cluster-with-ports-worker gpu=true:NoSchedule
+# kubectl taint node kind-new-cluster-with-ports-worker2 gpu=false:NoSchedule
+# kubectl apply -f day-14-task-pod.yaml
+# kubectl get pod
+# kubectl describe pod nginx
+# kubectl delete pod nginx
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  tolerations:
+  - key: "gpu"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"

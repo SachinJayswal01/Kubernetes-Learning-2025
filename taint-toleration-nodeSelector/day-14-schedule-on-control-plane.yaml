@@ -1,0 +1,20 @@
+# kubectl get nodes
+# kubectl describe node kind-new-cluster-with-ports-control-plane
+# kubectl taint node kind-new-cluster-with-ports-control-plane node-role.kubernetes.io/control-plane:NoSchedule-
+# kubectl apply -f day-14-schedule-on-control-plane.yaml
+# kubectl get pod
+# kubectl describe pod redis
+# kubectl taint node kind-new-cluster-with-ports-control-plane node-role.kubernetes.io/control-plane:NoSchedule
+# kubectl taint node kind-new-cluster-with-ports-worker gpu=true:NoSchedule-
+# kubectl taint node kind-new-cluster-with-ports-worker2 gpu=false:NoSchedule-
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: redis
