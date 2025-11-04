@@ -1,0 +1,8 @@
+# kubectl apply -f namespace.yaml
+# kubectl get ns
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: memory-ns
+  name: memory-ns

@@ -1,0 +1,21 @@
+# kubectl apply -f pod.yaml
+# kubectl get pod -n memory-ns
+# kubectl top pod -n memory-ns
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mem-test
+  name: mem-test
+  namespace: memory-ns
+spec:
+  containers:
+  - name: mem-test
+    image: polinux/stress
+    resources:
+      requests:
+        memory: "100M"
+      limits:
+        memory: "200M"
+    command: ["stress"]
+    args: ["--vm", "1", "--vm-bytes", "150M", "--vm-hang", "1"]

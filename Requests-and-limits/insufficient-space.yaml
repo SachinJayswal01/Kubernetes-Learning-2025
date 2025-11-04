@@ -1,0 +1,23 @@
+# kubectl apply -f insufficient-space.yaml
+# kubectl get pod insufficient-test -n memory-ns
+# kubectl top pod insufficient-test -n memory-ns
+# kubectl describe pod insufficient-test -n memory-ns
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: insufficient-test
+  name: insufficient-test
+  namespace: memory-ns
+spec:
+  containers:
+  - name: insufficient-test
+    image: polinux/stress
+    resources:
+      requests: 
+        memory: "10G"
+      limits:
+        memory: "100G"
+    command: ['stress']
+    args: ["--vm", "1", "--vm-bytes", "200M", "--vm-hang", "1"]
+    

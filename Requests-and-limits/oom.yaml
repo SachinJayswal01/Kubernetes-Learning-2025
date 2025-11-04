@@ -1,0 +1,23 @@
+# kubectl apply -f oom.yaml
+# kubectl get pod oom-test -n memory-ns
+# kubectl top pod oom-test -n memory-ns
+# kubectl describe pod oom-test -n memory-ns
+apiVersion: v1
+kind: Pod
+metadata:
+  labels: 
+    app: oom-test
+  name: oom-test
+  namespace: memory-ns
+spec:
+  containers:
+  - name: oom-test
+    image: polinux/stress
+    resources:
+      requests:
+        memory: "50M"
+      limits:
+        memory: "100M"
+    command: ["stress"]
+    args: ["--vm", "1", "--vm-bytes", "200M", "--vm-hang", "1"]
+
