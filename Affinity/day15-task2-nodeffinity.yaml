@@ -1,0 +1,25 @@
+# kubectl apply -f day15-task2-nodeffinity.yaml
+# kubectl get pod
+# kubectl describe pod redis
+# kubectl label node kind-new-cluster-with-ports-worker2 disktype=
+# kubectl get pod
+# kubectl label node kind-new-cluster-with-ports-worker2 disktype-
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: redis
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disktype
+            operator: Exists
+        

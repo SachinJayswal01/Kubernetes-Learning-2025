@@ -1,5 +1,10 @@
-# kubectl label node kind-new-cluster-with-ports-worker disk=ssd
-# kubectl label node kind-new-cluster-with-ports-worker disk-
+# kubectl apply -f day15-task-nodeffinity.yaml
+# kubectl get pod
+# kubectl describe pod nginx
+# kubectl label node kind-new-cluster-with-ports-worker disktype=ssd
+# kubectl get pod
+# kubectl label node kind-new-cluster-with-ports-worker disktype-
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -15,7 +20,8 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: disk
+          - key: disktype
             operator: In
             values:
             - ssd
+        
