@@ -1,0 +1,13 @@
+# kubectl get svc
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: php-apache
+  name: php-apache
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: php-apache
