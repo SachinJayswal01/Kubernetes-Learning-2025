@@ -1,0 +1,26 @@
+# kubectl apply -f day18-task1.yaml
+# kubectl get po
+# kubectl describe pod busybox-pod
+apiVersion: v1
+kind: Pod
+metadata:
+  labels: 
+    app: busybox-pod
+  name: busybox-pod
+spec:
+  containers:
+  - name: busybox-pod
+    image: registry.k8s.io/busybox:1.27.2
+    ports:
+    - containerPort: 8080
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat 
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
