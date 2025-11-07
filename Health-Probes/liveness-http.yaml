@@ -1,0 +1,34 @@
+# kubectl apply -f liveness-http.yaml
+# kubectl get pod
+# kubectl describe pod liveness-http
+# kubectl exec -it pod/liveness-http -- sh
+# touch /healthz
+# ls
+# exit
+# kubectl apply --force -f liveness-http.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: liveness-http
+  name: liveness-http
+spec:
+  containers:
+  - name: liveness-http
+    image: registry.k8s.io/e2e-test-images/agnhost:2.40
+    ports:
+    - containerPort: 80
+    args:
+    - liveness
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10

@@ -1,0 +1,28 @@
+# kubectl apply -f liveness-tcp.yaml
+# kubectl get pod
+# kubectl describe pod liveness-tcp
+# kubectl apply --force -f liveness-tcp.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: liveness-tcp
+  name: liveness-tcp
+spec:
+  containers:
+  - name: liveness-tcp
+    image: registry.k8s.io/goproxy:0.1
+    ports:
+    - containerPort: 81
+    args:
+    - liveness
+    livenessProbe:
+      tcpSocket:
+        port: 80
+      initialDelaySeconds: 15
+      periodSeconds: 10
+    readinessProbe:
+      tcpSocket:
+        port: 80
+      initialDelaySeconds: 15
+      periodSeconds: 10

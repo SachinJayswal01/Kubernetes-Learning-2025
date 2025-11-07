@@ -1,0 +1,26 @@
+# kubectl apply -f liveness-command.yaml
+# kubectl get pod
+# kubectl describe pod liveness-command
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: liveness-command
+  name: liveness-command
+spec:
+  containers:
+  - name: liveness-command
+    image: registry.k8s.io/busybox:1.27.2
+    ports:
+    - containerPort: 80
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 10
+      periodSeconds: 5
