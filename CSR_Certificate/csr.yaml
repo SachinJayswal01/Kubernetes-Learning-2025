@@ -1,10 +1,12 @@
-# openssl genrsa -out sachin.key 2024
+# openssl genrsa -out sachin.key 2025
 # openssl req -new -key sachin.key -out sachin.csr -subj "//CN=sachin"
 # kubectl apply -f csr.yaml
 # kubectl get csr
 # kubectl describe csr sachin
 # kubectl certificate approve sachin
 # kubectl describe csr sachin
+# kubectl get csr sachin -o yaml > certificate.yaml
+# echo "cert" | base64 -d
 apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
