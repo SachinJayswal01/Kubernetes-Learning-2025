@@ -1,0 +1,25 @@
+# kubectl describe pod/app-pod
+# kubectl exec -it pod/app-pod -- sh
+# echo $FIRSTNAME
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: pod
+  name: app-pod
+spec:
+   containers:
+   - name: app-pod
+     image: registry.k8s.io/busybox:1.27.2
+     command: ['sh','-c','echo the app is running! && sleep 600']
+     env:
+     - name: FIRSTNAME
+       valueFrom:
+         configMapKeyRef:
+           name: cm-app
+           key: firstname
+     - name: LASTNAME
+       valueFrom:
+         configMapKeyRef:
+           name: cm-app
+           key: lastname
