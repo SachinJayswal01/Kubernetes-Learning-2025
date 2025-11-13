@@ -1,0 +1,25 @@
+# kubectl apply -f binding.yaml
+# kubectl get rolebinding
+# kubectl describe rolebinding/read-pod
+# kubectl auth can-i get pods --as sachin
+# kubectl config set-context sachin --cluster=kind-kind-new-cluster-with-ports --user=sachin
+# kubectl config get-context
+# kubectl config set-credentials sachin --client-key=sachin.key --client-certificate=sachin.crt --embed-cert=true
+# kubectl config view
+# kubectl config use-context sachin
+# kubectl auth whoami
+# kubectl auth can-i get pods
+# kubectl get pod
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pod
+  namespace: default
+subjects:
+- kind: User
+  name: sachin
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-role
+  apiGroup: rbac.authorization.k8s.io
