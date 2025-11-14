@@ -4,7 +4,7 @@
 # kubectl auth can-i get pods --as sachin
 # kubectl config set-context sachin --cluster=kind-kind-new-cluster-with-ports --user=sachin
 # kubectl config get-context
-# kubectl config set-credentials sachin --client-key=sachin.key --client-certificate=sachin.crt --embed-cert=true
+# kubectl config set-credentials sachin --client-key=sachin.key --client-certificate=sachin.crt --embed-certs=true
 # kubectl config view
 # kubectl config use-context sachin
 # kubectl auth whoami

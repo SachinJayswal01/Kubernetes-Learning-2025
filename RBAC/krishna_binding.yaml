@@ -1,0 +1,24 @@
+# kubectl apply -f krishna_binding.yaml
+# kubectl get rolebinding
+# kubectl describe rolebinding/read-pod
+# kubectl auth can-i get pods --as krishna
+# kubectl config set-credentials krishna --client-key=krishna.key --client-certificate=krishna.crt --embed-certs=true
+# kubectl config view
+# kubectl config use-context krishna
+# kubectl auth whoami
+# kubectl auth can-i get pods
+# kubectl run nginx --image=nginx:1.29
+# kubectl get pod
+# kubectl create deploy nginx-deploy --image=nginx:1.29
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+subjects:
+  - kind: User
+    name: krishna
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io

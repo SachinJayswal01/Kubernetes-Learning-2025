@@ -1,0 +1,12 @@
+# kubectl apply -f krishna_role.yaml
+# kubectl get role
+# kubectl describe role pod-reader
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-reader
+rules:
+ - apiGroups: [""]
+   resources: ["pods"]
+   verbs: ["watch", "get", "list"]
+  

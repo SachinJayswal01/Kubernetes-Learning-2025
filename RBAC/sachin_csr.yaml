@@ -6,6 +6,7 @@
 # kubectl auth can-i get pods --as sachin
 # kubectl apply -f sachin_csr.yaml
 # kubectl get csr
+# kubectl certificate approve sachin
 # kubectl get csr sachin -o yaml > sachin_crt.yaml
 
 apiVersion: certificates.k8s.io/v1
